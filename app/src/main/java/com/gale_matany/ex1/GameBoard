@@ -1,0 +1,9 @@
+package com.gale_matany.ex1;
+
+public class GameBoard {
+
+    public GameBoard() {
+
+    }
+
+}
