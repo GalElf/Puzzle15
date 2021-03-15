@@ -2,8 +2,65 @@ package com.gale_matany.ex1;
 
 public class GameBoard {
 
-    public GameBoard() {
+    String game[][];
+    // save the location of the empty square
+    int iBlank;
+    int jBlank;
 
+    public GameBoard() {
+        game = new String[4][4];
+        createGame();
+    }
+
+    public void createGame() {
+        for (int i = 0, num=1; i < game.length*game.length; i++, num++) {
+            game[i / game.length][i % game.length] = num + "";
+        }
+        iBlank = game.length-1;
+        jBlank = game.length-1;
+        game[iBlank][jBlank] = "0";
+
+    }
+
+    // check if the chosen move is legal and if yes call makeMove function
+    public boolean checkIfMoveIsAllowed(String num) {
+        if(jBlank-1 >= 0 && game[iBlank][jBlank-1].equalsIgnoreCase(num)) {
+            makeMove(iBlank, jBlank-1);
+            return true;
+        }
+        if(jBlank+1 < game.length && game[iBlank][jBlank+1].equalsIgnoreCase(num)) {
+            makeMove(iBlank, jBlank+1);
+            return true;
+        }
+        if(iBlank-1 >= 0 && game[iBlank-1][jBlank].equalsIgnoreCase(num)) {
+            makeMove(iBlank-1, jBlank);
+            return true;
+        }
+        if(iBlank+1 < game.length && game[iBlank+1][jBlank].equalsIgnoreCase(num)) {
+            makeMove(iBlank+1, jBlank);
+            return true;
+        }
+        return false;
+    }
+
+    // make one move only after check is legal
+    public void makeMove(int i, int j) {
+        String str = game[i][j];
+        game[i][j] = game[iBlank][jBlank];
+        game[iBlank][jBlank] = str;
+        iBlank = i;
+        jBlank = j;
+    }
+
+
+    // Check if the game is over or not
+    public boolean checkIfGameOver() {
+        for (int i = 0, num=1; i < game.length*game.length-1; i++, num++) {
+            if(!game[i / game.length][i % game.length].equals(num + "")) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

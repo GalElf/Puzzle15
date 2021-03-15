@@ -20,10 +20,9 @@ public class GameActivity extends AppCompatActivity {
 
         TextView gameTime = findViewById(R.id.game_time);
         countTime(gameTime);
-
-
+        
     }
-    
+
 
     private void countTime(TextView gameTime){
         mm = 0;
