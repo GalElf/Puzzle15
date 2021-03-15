@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Puzzle 15</string>
+    <string name="creators">Gal Elfersy &amp; Matan Yamin</string>
+    <string name="about_app_title">About App</string>
+    <string name="exit_app_title">Exit App</string>
+    <string name="exit_app">Do you really want to exit Puzzle 15?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+
+    <string name="main_title">Welcome to Game of Fifteen</string>
+    <string name="start_game">Start Play</string>
+    <string name="music_txt">Music</string>
+
+    <string name="restart_game">Start New Game</string>
+    <string name="game_time">Time: 00:00</string>
+    <string name="game_moves">Moves: 0000</string>
+
+    <string name="num0">1</string>
+    <string name="num1">2</string>
+    <string name="num2">3</string>
+    <string name="num3">4</string>
+    <string name="num4">5</string>
+    <string name="num5">6</string>
+    <string name="num6">7</string>
+    <string name="num7">8</string>
+    <string name="num8">9</string>
+    <string name="num9">10</string>
+    <string name="num10">11</string>
+    <string name="num11">12</string>
+    <string name="num12">13</string>
+    <string name="num13">14</string>
+    <string name="num14">15</string>
+
+
 </resources>
