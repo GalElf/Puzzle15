@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class GameActivity extends AppCompatActivity {
 
     private int mm;
     private int ss;
-    private String seconds;
-    private String minutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +20,13 @@ public class GameActivity extends AppCompatActivity {
 
         TextView gameTime = findViewById(R.id.game_time);
         countTime(gameTime);
-        
+
     }
 
 
     private void countTime(TextView gameTime){
         mm = 0;
         ss = 0;
-        seconds = "00";
-        minutes = "00";
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -39,18 +36,12 @@ public class GameActivity extends AppCompatActivity {
                         mm++;
                         ss = 0;
                     }
-                    seconds = "" + ss;
-                    minutes = "" + mm;
-                    if(ss < 10){
-                        seconds = "0" + ss;
-                    }
-                    if(mm < 10){
-                        minutes = "0" + mm;
-                    }
+                    String seconds = String.format(Locale.getDefault(), "%02d", ss);
+                    String minutes = String.format(Locale.getDefault(), "%02d", mm);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            gameTime.setText("Time: " + minutes + ":" + seconds);
+                            gameTime.setText(String.format("Time: %s:%s", minutes, seconds));
                         }
                     });
                     SystemClock.sleep(1000);
