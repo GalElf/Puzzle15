@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameBoard {
 
-    String game[][];
+    String[][] game;
     // save the location of the empty square
     private int iBlank;
     private int jBlank;
@@ -16,15 +16,26 @@ public class GameBoard {
         createGame();
     }
 
+
     public void createGame() {
-//        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
-//            game[i / game.length][i % game.length] = num + "";
-//        }
+        createRandomGame();
         iBlank = game.length - 1;
         jBlank = game.length - 1;
-        game[iBlank][jBlank] = "0";
+        game[iBlank][jBlank] = "";
         countMoves = 0;
-        createRandomGame();
+        // create fake game for testing - need to delete before applying
+        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
+            game[i / game.length][i % game.length] = num + "";
+        }
+        game[3][3] = "15";
+        game[3][2] = "";
+        iBlank = game.length - 1;
+        jBlank = game.length - 2;
+    }
+
+    // create new game - reset all the variables
+    public void restartGame() {
+        createGame();
     }
 
     // create random puzzle to play
@@ -62,10 +73,7 @@ public class GameBoard {
                 }
             }
         }
-        if (count % 2 == 0) {
-            return true;
-        }
-        return false;
+        return count % 2 == 0;
     }
 
     // check if the chosen move is legal and if yes call makeMove function
@@ -102,6 +110,16 @@ public class GameBoard {
     // count the legal moves the player do
     public int getCountMoves() {
         return countMoves;
+    }
+
+    // return the empty box location - i
+    public int getIBlank() {
+        return iBlank;
+    }
+
+    // return the empty box location - j
+    public int getJBlank() {
+        return jBlank;
     }
 
     // Check if the game is over or not
