@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Puzzle 15</string>
     <string name="creators">Gal Elfersy &amp; Matan Yamin</string>
+    <string name="menu_about">About</string>
     <string name="about_app_title">About App</string>
+    <string name="menu_exit">Exit</string>
     <string name="exit_app_title">Exit App</string>
     <string name="exit_app">Do you really want to exit Puzzle 15?</string>
     <string name="yes">Yes</string>
