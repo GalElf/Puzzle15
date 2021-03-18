@@ -56,8 +56,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num0" />
 
             <TextView
@@ -65,9 +66,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num1" />
 
             <TextView
@@ -75,9 +77,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num2" />
 
             <TextView
@@ -85,10 +88,11 @@
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num3" />
 
         </LinearLayout>
@@ -104,9 +108,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num4" />
 
             <TextView
@@ -114,9 +119,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num5" />
 
             <TextView
@@ -124,9 +130,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num6" />
 
             <TextView
@@ -134,9 +141,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num7" />
         </LinearLayout>
 
@@ -151,9 +159,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num8" />
 
             <TextView
@@ -161,9 +170,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num9" />
 
             <TextView
@@ -171,9 +181,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num10" />
 
             <TextView
@@ -181,9 +192,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num11" />
         </LinearLayout>
 
@@ -198,9 +210,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num12" />
 
             <TextView
@@ -208,9 +221,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num13" />
 
             <TextView
@@ -218,9 +232,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="@string/num14" />
 
             <TextView
@@ -228,9 +243,10 @@
                 android:layout_width="80dp"
                 android:gravity="center"
                 android:textSize="40sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:background="@drawable/add_border"
+                android:background="@drawable/wood"
                 android:text="" />
         </LinearLayout>
     </LinearLayout>
