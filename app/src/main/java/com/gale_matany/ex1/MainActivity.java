@@ -4,8 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,21 +23,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button playBtn;
     private Switch startMusic;
     private boolean playMusic;
+    private SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = getSharedPreferences("GameData", Context.MODE_PRIVATE);
 
         playBtn = (Button) findViewById(R.id.play_btn_id);
         playBtn.setOnClickListener(this);
         startMusic = (Switch) findViewById(R.id.music_switch_id);
-        playMusic = false;
+        playMusic = sp.getBoolean("playMusic", false);
+        startMusic.setChecked(playMusic);
+
 
         startMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 playMusic = isChecked;
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean("playMusic", playMusic);
+                editor.commit();
             }
         });
     }
@@ -47,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("music", playMusic);
             startActivity(intent);
         }
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu)

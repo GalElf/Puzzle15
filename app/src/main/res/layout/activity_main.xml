@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/back"
     app:layoutDescription="@xml/activity_main_scene"
     tools:context=".MainActivity"
     android:gravity="center"
@@ -42,13 +43,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/music_note_icon"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            app:tint="@color/black" />
 
         <Switch
             android:id="@+id/music_switch_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/music_txt"
+            android:textColor="@color/black"
             android:checked="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 

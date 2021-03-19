@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private boolean playMusic;
     private boolean stopTime;
     private MediaPlayer mp;
+    Thread thread;
 
 
     @Override
@@ -53,7 +54,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             game[i / SIZE][i % SIZE] = ((TextView) findViewById(resID));
             game[i / SIZE][i % SIZE].setOnClickListener(this);
         }
-
+        thread = null;
 
         initializeGame();
     }
@@ -61,6 +62,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void initializeGame() {
         for (int i = 0, num = 1; i < SIZE * SIZE; i++, num++) {
             game[i / SIZE][i % SIZE].setText(puzzle.game[i / SIZE][i % SIZE]);
+            game[i / SIZE][i % SIZE].setBackgroundResource(R.drawable.wood);
         }
         gameTime.setText(String.format("Time: %s:%s", "00", "00"));
         moves = puzzle.getCountMoves();
@@ -71,6 +73,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         for (int index = 0; index < SIZE * SIZE; index++) {
             game[index / SIZE][index % SIZE].setClickable(true);
         }
+        game[puzzle.getIBlank()][puzzle.getJBlank()].setBackgroundResource(R.drawable.non_wood);
         countTime(gameTime);
     }
 
@@ -78,88 +81,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.reset_game){
+            puzzle.restartGame();
+            initializeGame();
+        }
+
         boolean legalMove = false;
         int iBlank = puzzle.getIBlank();
         int jBlank = puzzle.getJBlank();
         int i = -1, j = -1;
 
-        boolean winner = false;
-        switch (v.getId()) {
-            case R.id.num0:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[0][0].getText().toString());
-                i = 0; j = 0;
-                break;
-            case R.id.num1:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[0][1].getText().toString());
-                i = 0; j = 1;
-                break;
-            case R.id.num2:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[0][2].getText().toString());
-                i = 0; j = 2;
-                break;
-            case R.id.num3:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[0][3].getText().toString());
-                i = 0; j = 3;
-                break;
-            case R.id.num4:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[1][0].getText().toString());
-                i = 1; j = 0;
-                break;
-            case R.id.num5:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[1][1].getText().toString());
-                i = 1; j = 1;
-                break;
-            case R.id.num6:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[1][2].getText().toString());
-                i = 1; j = 2;
-                break;
-            case R.id.num7:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[1][3].getText().toString());
-                i = 1; j = 3;
-                break;
-            case R.id.num8:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[2][0].getText().toString());
-                i = 2; j = 0;
-                break;
-            case R.id.num9:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[2][1].getText().toString());
-                i = 2; j = 1;
-                break;
-            case R.id.num10:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[2][2].getText().toString());
-                i = 2; j = 2;
-                break;
-            case R.id.num11:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[2][3].getText().toString());
-                i = 2; j = 3;
-                break;
-            case R.id.num12:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[3][0].getText().toString());
-                i = 3; j = 0;
-                break;
-            case R.id.num13:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[3][1].getText().toString());
-                i = 3; j = 1;
-                break;
-            case R.id.num14:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[3][2].getText().toString());
-                i = 3; j = 2;
-                break;
-            case R.id.num15:
-                legalMove = puzzle.checkIfMoveIsAllowed(game[3][3].getText().toString());
-                i = 3; j = 3;
-                break;
-            case R.id.reset_game:
-                puzzle.restartGame();
-                initializeGame();
-                break;
+        for (int index = 0; index < SIZE * SIZE; index++) {
+            if(game[index / SIZE][index % SIZE].getId() == v.getId()){
+                legalMove = puzzle.checkIfMoveIsAllowed(game[index / SIZE][index % SIZE].getText().toString());
+                i = index / SIZE;
+                j = index % SIZE;
+            }
         }
+
         if (legalMove) {
             moves = puzzle.getCountMoves();
             countMove.setText(String.format("Moves: %s", String.format(Locale.getDefault(), "%04d", moves)));
             String lastNum = game[i][j].getText().toString();
             game[i][j].setText("");
+            game[i][j].setBackgroundResource(R.drawable.non_wood);
             game[iBlank][jBlank].setText(lastNum);
+            game[iBlank][jBlank].setBackgroundResource(R.drawable.wood);
         }
         if (puzzle.checkIfGameOver()) {
             for (int index = 0; index < SIZE * SIZE; index++) {
@@ -171,28 +118,31 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void countTime(TextView gameTime){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!stopTime) {
-                    ss++;
-                    if(ss == 60){
-                        mm++;
-                        ss = 0;
-                    }
-                    String seconds = String.format(Locale.getDefault(), "%02d", ss);
-                    String minutes = String.format(Locale.getDefault(), "%02d", mm);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            gameTime.setText(String.format("Time: %s:%s", minutes, seconds));
+        if (thread == null) {
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!stopTime) {
+                        ss++;
+                        if (ss == 60) {
+                            mm++;
+                            ss = 0;
                         }
-                    });
-                    SystemClock.sleep(1000);
+                        String seconds = String.format(Locale.getDefault(), "%02d", ss);
+                        String minutes = String.format(Locale.getDefault(), "%02d", mm);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                gameTime.setText(String.format("Time: %s:%s", minutes, seconds));
+                            }
+                        });
+                        SystemClock.sleep(1000);
+                    }
+                    thread = null;
                 }
-            }
-        }).start();
+            });
+            thread.start();
+        }
     }
-
 
 }
