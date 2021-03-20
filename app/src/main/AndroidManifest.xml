@@ -7,7 +7,7 @@
         android:icon="@drawable/puzzle15_ico"
         android:label="@string/app_name"
         android:roundIcon="@drawable/puzzle15_ico"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.Puzzle15">
         <activity android:name=".GameActivity">
 

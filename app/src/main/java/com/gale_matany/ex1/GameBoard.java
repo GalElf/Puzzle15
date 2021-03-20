@@ -3,7 +3,7 @@ package com.gale_matany.ex1;
 import java.util.Random;
 
 public class GameBoard {
-
+    final int SIZE = 4;
     String[][] game;
     // save the location of the empty square
     private int iBlank;
@@ -12,7 +12,7 @@ public class GameBoard {
 
 
     public GameBoard() {
-        game = new String[4][4];
+        game = new String[SIZE][SIZE];
         createGame();
     }
 
@@ -20,7 +20,7 @@ public class GameBoard {
     public void createGame() {
         createRandomGame();
         countMoves = 0;
-//         create fake game for testing - need to delete before applying
+//        create fake game for testing - need to delete before applying
 //        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
 //            game[i / game.length][i % game.length] = num + "";
 //        }
