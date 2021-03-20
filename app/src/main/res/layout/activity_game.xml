@@ -41,223 +41,219 @@
             android:text="@string/game_time" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="323dp"
         android:layout_height="323dp"
-        android:background="@color/black">
+        android:background="@color/black"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_height="80dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/num0"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@drawable/wood"
+                android:text="@string/num0" />
 
-                <TextView
-                    android:id="@+id/num0"
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:background="@drawable/wood"
-                    android:text="@string/num0" />
+            <TextView
+                android:id="@+id/num1"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num1" />
 
-                <TextView
-                    android:id="@+id/num1"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num1" />
+            <TextView
+                android:id="@+id/num2"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num2" />
 
-                <TextView
-                    android:id="@+id/num2"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num2" />
+            <TextView
+                android:id="@+id/num3"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/wood"
+                android:text="@string/num3" />
 
-                <TextView
-                    android:id="@+id/num3"
-                    android:layout_width="0dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/wood"
-                    android:text="@string/num3" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/num4"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num4" />
-
-                <TextView
-                    android:id="@+id/num5"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num5" />
-
-                <TextView
-                    android:id="@+id/num6"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num6" />
-
-                <TextView
-                    android:id="@+id/num7"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num7" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/num8"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num8" />
-
-                <TextView
-                    android:id="@+id/num9"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num9" />
-
-                <TextView
-                    android:id="@+id/num10"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num10" />
-
-                <TextView
-                    android:id="@+id/num11"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num11" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/num12"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num12" />
-
-                <TextView
-                    android:id="@+id/num13"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num13" />
-
-                <TextView
-                    android:id="@+id/num14"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="@string/num14" />
-
-                <TextView
-                    android:id="@+id/num15"
-                    android:layout_width="80dp"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/wood"
-                    android:text="" />
-            </LinearLayout>
         </LinearLayout>
-    </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/num4"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num4" />
+
+            <TextView
+                android:id="@+id/num5"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num5" />
+
+            <TextView
+                android:id="@+id/num6"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num6" />
+
+            <TextView
+                android:id="@+id/num7"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/num8"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num8" />
+
+            <TextView
+                android:id="@+id/num9"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num9" />
+
+            <TextView
+                android:id="@+id/num10"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num10" />
+
+            <TextView
+                android:id="@+id/num11"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num11" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/num12"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num12" />
+
+            <TextView
+                android:id="@+id/num13"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num13" />
+
+            <TextView
+                android:id="@+id/num14"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="@string/num14" />
+
+            <TextView
+                android:id="@+id/num15"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="match_parent"
+                android:background="@drawable/wood"
+                android:text="" />
+        </LinearLayout>
+    </LinearLayout>
 
 
     <Button

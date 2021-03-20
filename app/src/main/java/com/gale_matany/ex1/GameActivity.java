@@ -1,10 +1,15 @@
 package com.gale_matany.ex1;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 
 import android.annotation.SuppressLint;
+import android.app.DirectAction;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     final int SIZE = 4;
@@ -27,8 +34,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private boolean playMusic;
     private boolean stopTime;
     private MediaPlayer mp;
-    Thread thread;
-
+    private Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         playMusic = bundle.getBoolean("music");
         mp = MediaPlayer.create(this, R.raw.heart_of_courage);
         stopTime = false;
-        if(playMusic)
+        if(playMusic) {
+            mp.setLooping(true);
             mp.start();
+        }
 
         countMove = (TextView) findViewById(R.id.move_count);
         startNewGame = (Button) findViewById(R.id.reset_game);
@@ -54,36 +62,43 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             game[i / SIZE][i % SIZE] = ((TextView) findViewById(resID));
             game[i / SIZE][i % SIZE].setOnClickListener(this);
         }
-        thread = null;
 
+        thread = null;
         initializeGame();
     }
 
-    private void initializeGame() {
-        for (int i = 0, num = 1; i < SIZE * SIZE; i++, num++) {
-            game[i / SIZE][i % SIZE].setText(puzzle.game[i / SIZE][i % SIZE]);
-            game[i / SIZE][i % SIZE].setBackgroundResource(R.drawable.wood);
-        }
-        gameTime.setText(String.format("Time: %s:%s", "00", "00"));
-        moves = puzzle.getCountMoves();
-        countMove.setText(String.format("Moves: %s", String.format(Locale.getDefault(), "%04d", moves)));
-        mm = 0;
-        ss = 0;
+    @Override
+    protected void onResume() {
+        super.onResume();
         stopTime = false;
-        for (int index = 0; index < SIZE * SIZE; index++) {
-            game[index / SIZE][index % SIZE].setClickable(true);
-        }
-        game[puzzle.getIBlank()][puzzle.getJBlank()].setBackgroundResource(R.drawable.non_wood);
-        countTime(gameTime);
+        countTime();
+        if(!mp.isPlaying() && playMusic)
+            mp.start();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-    @SuppressLint("NonConstantResourceId")
+        stopTime = true;
+        if(mp.isPlaying())
+            mp.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mp.release();
+        mp = null;
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.reset_game){
             puzzle.restartGame();
             initializeGame();
+            countTime();
         }
 
         boolean legalMove = false;
@@ -109,15 +124,29 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             game[iBlank][jBlank].setBackgroundResource(R.drawable.wood);
         }
         if (puzzle.checkIfGameOver()) {
-            for (int index = 0; index < SIZE * SIZE; index++) {
-                game[index / SIZE][index % SIZE].setClickable(false);
-            }
+            turnOffClicks(false);
             Toast.makeText(this, "Game Over - Puzzle Solved!", Toast.LENGTH_LONG).show();
             stopTime = true;
         }
     }
 
-    private void countTime(TextView gameTime){
+    private void initializeGame() {
+        for (int i = 0, num = 1; i < SIZE * SIZE; i++, num++) {
+            game[i / SIZE][i % SIZE].setText(puzzle.game[i / SIZE][i % SIZE]);
+            game[i / SIZE][i % SIZE].setBackgroundResource(R.drawable.wood);
+        }
+        gameTime.setText(String.format("Time: %s:%s", "00", "00"));
+        moves = puzzle.getCountMoves();
+        countMove.setText(String.format("Moves: %s", String.format(Locale.getDefault(), "%04d", moves)));
+        mm = 0;
+        ss = 0;
+        stopTime = false;
+        turnOffClicks(true);
+        game[puzzle.getIBlank()][puzzle.getJBlank()].setBackgroundResource(R.drawable.non_wood);
+//        countTime();
+    }
+
+    private void countTime(){
         if (thread == null) {
             thread = new Thread(new Runnable() {
                 @Override
@@ -145,4 +174,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void turnOffClicks(boolean onOrOff) {
+        for (int index = 0; index < SIZE * SIZE; index++) {
+            game[index / SIZE][index % SIZE].setClickable(onOrOff);
+        }
+    }
 }
