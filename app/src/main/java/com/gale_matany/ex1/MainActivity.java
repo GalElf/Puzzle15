@@ -9,20 +9,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button playBtn;
-    private Switch startMusic;
     private boolean playMusic;
+    private Switch startMusic;
     private SharedPreferences sp;
 
     @Override
@@ -44,14 +43,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 playMusic = isChecked;
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean("playMusic", playMusic);
-                editor.commit();
+                editor.apply();
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        if(R.id.play_btn_id == v.getId()){
+        if(playBtn.getId() == v.getId()){
             Intent intent = new Intent(MainActivity.this, GameActivity.class);
             intent.putExtra("music", playMusic);
             startActivity(intent);
