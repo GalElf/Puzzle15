@@ -15,14 +15,6 @@ public class GameBoard {
     public GameBoard() {
         game = new String[SIZE][SIZE];
         createRandomGame();
-//        create fake game for testing - need to delete before applying
-//        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
-//            game[i / game.length][i % game.length] = num + "";
-//        }
-//        game[3][3] = "15";
-//        game[3][2] = "";
-//        iBlank = game.length - 1;
-//        jBlank = game.length - 2;
     }
 
     // create new game - reset all the variables
@@ -125,6 +117,5 @@ public class GameBoard {
     public int getJBlank() {
         return jBlank;
     }
-
 
 }

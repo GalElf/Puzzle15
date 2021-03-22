@@ -1,25 +1,15 @@
 package com.gale_matany.ex1;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
-
-import android.annotation.SuppressLint;
-import android.app.DirectAction;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CancellationSignal;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 import java.util.Locale;
-import java.util.function.Consumer;
+
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     final int SIZE = 4;
@@ -67,8 +57,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         initializeGame();
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -99,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         // click for start new game
-        if (v.getId() == R.id.reset_game){
+        if (startNewGame.getId() == v.getId()){
             puzzle.restartGame();
             initializeGame();
             countTime();
