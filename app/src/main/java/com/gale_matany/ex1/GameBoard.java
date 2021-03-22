@@ -1,5 +1,7 @@
 package com.gale_matany.ex1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GameBoard {
@@ -10,16 +12,9 @@ public class GameBoard {
     private int jBlank;
     private int countMoves;
 
-
     public GameBoard() {
         game = new String[SIZE][SIZE];
-        createGame();
-    }
-
-
-    public void createGame() {
         createRandomGame();
-        countMoves = 0;
 //        create fake game for testing - need to delete before applying
 //        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
 //            game[i / game.length][i % game.length] = num + "";
@@ -32,71 +27,64 @@ public class GameBoard {
 
     // create new game - reset all the variables
     public void restartGame() {
-        createGame();
+        createRandomGame();
     }
 
     // create random puzzle to play
-    public void createRandomGame() {
-        int[] puzzle = new int[game.length * game.length];
-        for (int i = 0, num = 1; i < puzzle.length - 1; i++, num++) {
-            puzzle[i] = num;
+    private void createRandomGame() {
+        for (int i = 0, num = 1; i < SIZE * SIZE - 1; i++, num++) {
+            game[i / SIZE][i % SIZE] = num + "";
         }
-        puzzle[puzzle.length - 1] = 0;
+        game[SIZE - 1][SIZE - 1] = "";
+        iBlank = SIZE - 1;
+        jBlank = SIZE - 1;
         Random random = new Random();
-        do {
-            int i = puzzle.length - 1;
-            while (i > 1) {
-                int index = random.nextInt(i);
-                int num = puzzle[i];
-                puzzle[i] = puzzle[index];
-                puzzle[index] = num;
-                i--;
-            }
-            // as long the puzzle isn't solvable create new random puzzle
-        } while (!checkIfSolvable(puzzle));
-        for (int i = 0; i < game.length * game.length; i++) {
-            if(puzzle[i] == 0)
-                game[i / game.length][i % game.length] = "";
-            else
-                game[i / game.length][i % game.length] = puzzle[i] + "";
+
+        // lastNum use for prevent using the last number we used for the swap between the empty box and number
+        String lastNum = "0";
+        for(int i=0; i<50; i++) {
+            List<String> options = findLegalSquareToSwap(game, iBlank, jBlank, lastNum);
+            String num = options.get(random.nextInt(options.size()));
+            lastNum = num; // save the number we are going to change
+            checkIfMoveIsAllowed(num);
         }
+        countMoves = 0;
     }
 
-    // check if the random puzzle has solution or not
-    private boolean checkIfSolvable(int[] puzzle) {
-        int count = 0;
-        for (int i = 0; i < puzzle.length; i++) {
-            for (int j = i; j < puzzle.length; j++) {
-                if (puzzle[j] == 0) {
-                    iBlank = i / game.length;
-                    jBlank = i % game.length;
-                }
-                if (puzzle[j] != 0 && puzzle[i] > puzzle[j]) {
-                    count++;
-                }
-            }
+    // for the random create we search the for the option we can swap
+    // we choose random number from the option and swap it with the empty square
+    private List<String> findLegalSquareToSwap(String[][] puzzle, int i, int j, String lastNum) {
+        List<String> options = new ArrayList<String>();
+        if (j - 1 >= 0 && !puzzle[i][j - 1].equals(lastNum)) {
+            options.add(puzzle[i][j - 1]);
         }
-        if(iBlank % 2 == 0) {
-            return count % 2 != 0;
+        if (j + 1 < SIZE && !puzzle[i][j + 1].equals(lastNum)) {
+            options.add(puzzle[i][j + 1]);
         }
-        return count % 2 == 0;
+        if (i - 1 >= 0 && !puzzle[i - 1][j].equals(lastNum)) {
+            options.add(puzzle[i - 1][j]);
+        }
+        if (i + 1 < SIZE && !puzzle[i + 1][j].equals(lastNum)) {
+            options.add(puzzle[i + 1][j]);
+        }
+        return options;
     }
 
     // check if the chosen move is legal and if yes call makeMove function
     public boolean checkIfMoveIsAllowed(String num) {
-        if (jBlank - 1 >= 0 && game[iBlank][jBlank - 1].equalsIgnoreCase(num)) {
+        if (jBlank - 1 >= 0 && game[iBlank][jBlank - 1].equals(num)) {
             makeMove(iBlank, jBlank - 1);
             return true;
         }
-        if (jBlank + 1 < game.length && game[iBlank][jBlank + 1].equalsIgnoreCase(num)) {
+        if (jBlank + 1 < SIZE && game[iBlank][jBlank + 1].equals(num)) {
             makeMove(iBlank, jBlank + 1);
             return true;
         }
-        if (iBlank - 1 >= 0 && game[iBlank - 1][jBlank].equalsIgnoreCase(num)) {
+        if (iBlank - 1 >= 0 && game[iBlank - 1][jBlank].equals(num)) {
             makeMove(iBlank - 1, jBlank);
             return true;
         }
-        if (iBlank + 1 < game.length && game[iBlank + 1][jBlank].equalsIgnoreCase(num)) {
+        if (iBlank + 1 < SIZE && game[iBlank + 1][jBlank].equals(num)) {
             makeMove(iBlank + 1, jBlank);
             return true;
         }
@@ -104,13 +92,23 @@ public class GameBoard {
     }
 
     // make one move only after check is legal
-    public void makeMove(int i, int j) {
+    private void makeMove(int i, int j) {
         String str = game[i][j];
         game[i][j] = game[iBlank][jBlank];
         game[iBlank][jBlank] = str;
         iBlank = i;
         jBlank = j;
         countMoves++;
+    }
+
+    // Check if the game is over or not
+    public boolean checkIfGameOver() {
+        for (int i = 0, num = 1; i < SIZE * SIZE - 1; i++, num++) {
+            if (!game[i / SIZE][i % SIZE].equals(num + "")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // count the legal moves the player do
@@ -128,14 +126,5 @@ public class GameBoard {
         return jBlank;
     }
 
-    // Check if the game is over or not
-    public boolean checkIfGameOver() {
-        for (int i = 0, num = 1; i < game.length * game.length - 1; i++, num++) {
-            if (!game[i / game.length][i % game.length].equals(num + "")) {
-                return false;
-            }
-        }
-        return true;
-    }
 
 }

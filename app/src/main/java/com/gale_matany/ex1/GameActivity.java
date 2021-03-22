@@ -56,10 +56,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         puzzle = new GameBoard();
 
         startNewGame.setOnClickListener(this);
-        for (int i = 0, num = 1; i < SIZE * SIZE; i++, num++) {
+        for (int i = 0; i < SIZE * SIZE; i++) {
             String txtID = "num" + i;
-            int resID = getResources().getIdentifier(txtID, "id", getPackageName());
-            game[i / SIZE][i % SIZE] = ((TextView) findViewById(resID));
+            int id = getResources().getIdentifier(txtID, "id", getPackageName());
+            game[i / SIZE][i % SIZE] = (TextView) findViewById(id);
             game[i / SIZE][i % SIZE].setOnClickListener(this);
         }
 
@@ -67,11 +67,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         initializeGame();
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
         stopTime = false;
-        countTime();
+        if(!puzzle.checkIfGameOver())
+            countTime();
         if(!mp.isPlaying() && playMusic)
             mp.start();
     }
@@ -95,6 +98,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        // click for start new game
         if (v.getId() == R.id.reset_game){
             puzzle.restartGame();
             initializeGame();
@@ -106,6 +110,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int jBlank = puzzle.getJBlank();
         int i = -1, j = -1;
 
+        // check which TextView was click and check if is legal then make the change move
         for (int index = 0; index < SIZE * SIZE; index++) {
             if(game[index / SIZE][index % SIZE].getId() == v.getId()){
                 legalMove = puzzle.checkIfMoveIsAllowed(game[index / SIZE][index % SIZE].getText().toString());
@@ -124,28 +129,31 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             game[iBlank][jBlank].setBackgroundResource(R.drawable.wood);
         }
         if (puzzle.checkIfGameOver()) {
-            turnOffClicks(false);
+            turnOnOffClicks(false);
             Toast.makeText(this, "Game Over - Puzzle Solved!", Toast.LENGTH_LONG).show();
             stopTime = true;
         }
     }
 
+    // init the game from start
     private void initializeGame() {
-        for (int i = 0, num = 1; i < SIZE * SIZE; i++, num++) {
+        // use to create new game and insert the random number in the TextView
+        for (int i = 0; i < SIZE * SIZE; i++) {
             game[i / SIZE][i % SIZE].setText(puzzle.game[i / SIZE][i % SIZE]);
             game[i / SIZE][i % SIZE].setBackgroundResource(R.drawable.wood);
         }
         gameTime.setText(String.format("Time: %s:%s", "00", "00"));
         moves = puzzle.getCountMoves();
         countMove.setText(String.format("Moves: %s", String.format(Locale.getDefault(), "%04d", moves)));
+        // reset the time counters variables
         mm = 0;
         ss = 0;
         stopTime = false;
-        turnOffClicks(true);
+        turnOnOffClicks(true);
         game[puzzle.getIBlank()][puzzle.getJBlank()].setBackgroundResource(R.drawable.non_wood);
-//        countTime();
     }
 
+    // count the time play for single game
     private void countTime(){
         if (thread == null) {
             thread = new Thread(new Runnable() {
@@ -174,7 +182,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void turnOffClicks(boolean onOrOff) {
+    // turn on or off the clicks of the TextView - depend if the game is over or not
+    private void turnOnOffClicks(boolean onOrOff) {
         for (int index = 0; index < SIZE * SIZE; index++) {
             game[index / SIZE][index % SIZE].setClickable(onOrOff);
         }
